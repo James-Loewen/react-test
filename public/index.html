@@ -27,17 +27,27 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <main>
+      <dialog id="new-book-dialog">
+        <form class="flex" onsubmit="return false" autocomplete="off">
+          <span>New book time!</span>
+          <div class="input-group">
+            <label for="title-input">Title:</label>
+            <input type="text" id="title-input" name="title-input" required>
+          </div>
+          <div class="input-group">
+            <label for="author-input">Author:</label>
+            <input type="text" id="author-input" name="author-input" required>
+          </div>
+          <button type="submit" id="new-book-submit">Submit</button>
+          <button type="button" id="cancel-input">Cancel</button>
+        </form>
+      </dialog>
+      <div class="header">
+        <h1 id="logo-text">Library</h1>
+        <button type="button" id="add-book">New</button>
+      </div>
+      <div id="root"></div>
+    </main>
   </body>
 </html>
