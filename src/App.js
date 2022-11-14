@@ -10,7 +10,7 @@ const myLibrary = [
 function App() {
   return (
     <div>
-      {myLibrary.foreach(book => {
+      {myLibrary.map(book => {
         <Book title={book.title} author={book.author} />
       })}
     </div>
