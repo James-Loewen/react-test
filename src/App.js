@@ -1,5 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+// import logo from './logo.svg';
 import './main.scss';
 
 const myLibrary = [
@@ -10,11 +10,62 @@ const myLibrary = [
 function App() {
   return (
     <div>
-      {myLibrary.map(book => {
-        <Book title={book.title} author={book.author} />
-      })}
+      <NewBookModal />
+      <Library />
     </div>
   );
+}
+
+class NewBookModal extends Component {
+  render() {
+    return (
+      <dialog id="new-book-dialog">
+        <form className="flex" onSubmit={e => e.preventDefault()} autoComplete="off">
+          <span>New book time!</span>
+          <div className="input-group">
+            <label htmlFor="title-input">Title:</label>
+            <input type="text" id="title-input" name="title-input" required />
+          </div>
+          <div className="input-group">
+            <label htmlFor="author-input">Author:</label>
+            <input type="text" id="author-input" name="author-input" required />
+          </div>
+          <button type="submit" id="new-book-submit">Submit</button>
+          <button type="button" id="cancel-input">Cancel</button>
+        </form>
+      </dialog>
+    )
+  }
+}
+
+class Library extends Component {
+  constructor(props) {
+    super(props)
+    this.state = this.getBooks();
+  }
+
+  getBooks() {
+    if (localStorage.miniLibrary) {
+      return {bookList: JSON.parse(localStorage.miniLibrary)};
+    } else {
+      return {bookList: myLibrary};
+    }
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   // this.props.bookList = 
+  // }
+
+  render() {
+    return (
+      <div className='card-container'>
+        {this.state.bookList.map(book => {
+          return (
+          <Book key={`${book.title}${book.author}`} title={book.title} author={book.author} />
+        )})}
+      </div>
+    )
+  }
 }
 
 class Book extends React.Component {
